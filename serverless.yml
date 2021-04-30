@@ -1,0 +1,32 @@
+service: layer-template
+
+plugins:
+  - serverless-plugin-package-path
+  - serverless-python-requirements
+
+provider:
+  name: aws
+  runtime: python3.8
+  stage: ${opt:stage, "dev"}
+
+
+layers:
+  <layer-name>:
+    name: layer-template-${self:provider.stage}
+    description: Layer abstractions.
+    # path: <folder>
+    compatibleRuntimes:
+      - python3.8
+
+resources:
+  Outputs:
+   <layer-name>LayerExport:
+      Value:
+        # Ref: <layer-name>LambdaLayer
+
+custom:
+  packagePath:
+    path: python/lib/python3.8/site-packages
+
+package:
+  artifact: ./.serverless/<layer-name>.zip

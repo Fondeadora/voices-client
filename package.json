@@ -1,0 +1,9 @@
+{
+  "license": "Apache-2.0",
+  "author": "Fondeadora",
+  "name": "layer-template",
+  "devDependencies": {
+    "serverless-plugin-package-path": "github:Fondeadora/serverless-plugin-package-path",
+    "serverless-python-requirements": "^5.1.1"
+  }
+}
