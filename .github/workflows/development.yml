@@ -34,16 +34,19 @@ jobs:
           key: ${{ runner.os }}-pip-${{ hashFiles('**/Pipfile.lock') }}
       - name: test
         uses: Fondeadora/ci-tools/test@v1.4.5
+        env:
+          VOICES_USER: ${{ secrets.VOICES_USER }}
+          VOICES_PASS: ${{ secrets.VOICES_PASS }}
         with:
           access_token: ${{ secrets.ACCESS_TOKEN }}
           cache_hit: ${{ steps.cache-dependencies.outputs.cache-hit == 'true' }}
           python_version: 3.8
-      - name: Publish code coverage
-        uses: paambaati/codeclimate-action@v2.6.0
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-        with:
-          coverageCommand: pipenv run make xmlcov
+      # - name: Publish code coverage
+      #   uses: paambaati/codeclimate-action@v2.6.0
+      #   env:
+      #     CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+      #   with:
+      #     coverageCommand: pipenv run make xmlcov
 
   commit_lint:
     runs-on: ubuntu-latest
@@ -62,4 +65,31 @@ jobs:
           access_token: ${{ secrets.ACCESS_TOKEN }}
           cache_hit: ${{ steps.cache-dependencies.outputs.cache-hit == 'true'}}
           lint_command: pipenv run make commit_check
+          python_version: 3.8
+
+  deploy:
+    needs:
+      - lint
+      - test
+      - commit_lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        id: cache-dependencies
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+      - name: deploy
+        uses: Fondeadora/ci-tools/serverless-deploy@v1.4.5
+        with:
+          access_token: ${{ secrets.ACCESS_TOKEN }}
+          stage: dev
+          cache_hit: ${{ steps.cache-dependencies.outputs.cache-hit == 'true' }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+          aws-profile: default
           python_version: 3.8

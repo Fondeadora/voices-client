@@ -1,4 +1,4 @@
-service: layer-template
+service: voices-layer
 
 plugins:
   - serverless-plugin-package-path
@@ -11,22 +11,22 @@ provider:
 
 
 layers:
-  <layer-name>:
-    name: layer-template-${self:provider.stage}
-    description: Layer abstractions.
-    # path: <folder>
+  voices:
+    name: voices-layer-${self:provider.stage}
+    description: Voices Layer abstractions.
+    path: voices
     compatibleRuntimes:
       - python3.8
 
 resources:
   Outputs:
-   <layer-name>LayerExport:
+   VoicesLayerExport:
       Value:
-        # Ref: <layer-name>LambdaLayer
+        Ref: VoicesLambdaLayer
 
 custom:
   packagePath:
     path: python/lib/python3.8/site-packages
 
 package:
-  artifact: ./.serverless/<layer-name>.zip
+  artifact: ./.serverless/voices.zip

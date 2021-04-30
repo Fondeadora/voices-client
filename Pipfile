@@ -15,9 +15,7 @@ pylint= "~=2.7.4"
 add-trailing-comma= "~=2.1.0"
 coverage = "*"
 
-
 [packages]
-# psycopg2-binary= "~=2.8.6"
 
 [requires]
 python_version = "3.8"
