@@ -2,7 +2,7 @@
   "license": "Apache-2.0",
   "author": "Fondeadora",
   "name": "voices",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Fondeadora/f4b-voices-layer.git"
