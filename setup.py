@@ -2,12 +2,20 @@
 
 from setuptools import find_packages, setup
 
+this_directory = path.abspath(path.dirname(__file__))
+
+with open('README.md', 'r') as f:
+    long_description = f.read()
+
 setup(
     name='voices-client',
     version='0.2.1',
     packages=find_packages(),
     description='Voices client',
+    long_description=long_description,
+    long_description_content_type='text/markdown',
     url='https://github.com/Fondeadora/voices-client.git',
+    package_data=dict(voices=['py.typed']),
     author='Fondeadora',
     author_email='tech@fondeadora.com',
     keywords=['client', 'voices', 'package'],
