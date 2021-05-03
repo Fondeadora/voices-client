@@ -3,7 +3,7 @@
 from setuptools import find_packages, setup
 
 setup(
-    name='voices',
+    name='voices-layer',
     packages=find_packages(),
     description='Layer for F4B Voices services',
     url='https://github.com/Fondeadora/f4b-voices-layer.git',
