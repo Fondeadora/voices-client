@@ -63,29 +63,3 @@ jobs:
           access_token: ${{ secrets.ACCESS_TOKEN }}
           cache_hit: ${{ steps.cache-dependencies.outputs.cache-hit == 'true'}}
           lint_command: pipenv run make commit_check
-
-  deploy:
-    needs:
-      - lint
-      - test
-      - commit_lint
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v2
-        id: cache-dependencies
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-npm-
-      - name: deploy
-        uses: Fondeadora/ci-tools/serverless-deploy@v1.4.5
-        with:
-          access_token: ${{ secrets.ACCESS_TOKEN }}
-          stage: dev
-          cache_hit: ${{ steps.cache-dependencies.outputs.cache-hit == 'true' }}
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
-          aws-profile: default
