@@ -7,7 +7,7 @@ with open('README.md', 'r') as f:
 
 setup(
     name='voices-client',
-    version='0.2.3',
+    version='0.2.4',
     packages=find_packages(),
     description='Voices client',
     long_description=long_description,
