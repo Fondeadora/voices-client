@@ -33,3 +33,22 @@ jobs:
       with:
         github_token: ${{ secrets.ACCESS_TOKEN }}
         tags: "true"
+
+  release:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2.2.1
+      with:
+        python-version: 3.8
+    - name: Install dependencies
+      run: python -m pip install -qU setuptools wheel twine
+    - name: Generating distribution archives
+      run: python setup.py sdist bdist_wheel
+    - name: Publish a Python distribution to PyPI
+      if: startsWith(github.event.ref, 'refs/tags')
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        user: __token__
+        password: ${{ secrets.PYPI_API_TOKEN }}
