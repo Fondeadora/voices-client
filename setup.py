@@ -10,5 +10,7 @@ setup(
     author='Fondeadora',
     author_email='tech@fondeadora.com',
     keywords=['layer', 'voices', 'package'],
-    install_requires=[],
+    install_requires=[
+        'requests==2.24.0',
+    ],
 )

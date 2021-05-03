@@ -35,36 +35,6 @@ venv: ## Create new virtual environment. Run `source venv/bin/activate` after th
 run: ## Execute local server
 	@./node_modules/.bin/sls offline start
 
-complexity: ## Run radon complexity checks for maintainability status.
-	@echo "Complexity check..."
-
-ifneq ($(cc_json), "{}")
-	@echo
-	@echo "Complexity issues"
-	@echo "-----------------"
-	@echo $(cc_json)
-endif
-
-ifneq ($(mi_json), "{}")
-	@echo
-	@echo "Maintainability issues"
-	@echo "----------------------"
-	@echo $(mi_json)
-endif
-
-ifneq ($(cc_json), "{}")
-	@echo
-	exit 1
-else
-ifneq ($(mi_json), "{}")
-	@echo
-	exit 1
-endif
-endif
-
-	@echo "OK"
-.PHONY: complexity
-
 htmlcov:
 	coverage html --include 'voices/*'
 

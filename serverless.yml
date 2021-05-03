@@ -6,7 +6,7 @@ plugins:
 
 provider:
   name: aws
-  runtime: python3.8
+  runtime: python3.7
   stage: ${opt:stage, "dev"}
 
 
@@ -16,7 +16,7 @@ layers:
     description: Voices Layer abstractions.
     path: voices
     compatibleRuntimes:
-      - python3.8
+      - python3.7
 
 resources:
   Outputs:
@@ -26,7 +26,7 @@ resources:
 
 custom:
   packagePath:
-    path: python/lib/python3.8/site-packages
+    path: python/lib/python3.7/site-packages
 
 package:
   artifact: ./.serverless/voices.zip
