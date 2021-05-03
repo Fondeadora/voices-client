@@ -2,15 +2,29 @@
 
 from setuptools import find_packages, setup
 
+this_directory = path.abspath(path.dirname(__file__))
+
+with open('README.md', 'r') as f:
+    long_description = f.read()
+
 setup(
-    name='voices-layer',
+    name='voices-client',
+    version='0.2.1',
     packages=find_packages(),
-    description='Layer for F4B Voices services',
-    url='https://github.com/Fondeadora/f4b-voices-layer.git',
+    description='Voices client',
+    long_description=long_description,
+    long_description_content_type='text/markdown',
+    url='https://github.com/Fondeadora/voices-client.git',
+    package_data=dict(voices=['py.typed']),
     author='Fondeadora',
     author_email='tech@fondeadora.com',
-    keywords=['layer', 'voices', 'package'],
-    install_requires=[
-        'requests==2.24.0',
+    keywords=['client', 'voices', 'package'],
+    classifiers=[
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
     ],
+    python_requires='>=3.6'
 )
