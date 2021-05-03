@@ -35,6 +35,8 @@ jobs:
         tags: "true"
 
   release:
+    needs:
+      - bump
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
