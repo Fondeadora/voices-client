@@ -16,7 +16,6 @@ jobs:
         with:
           path: .venv
           key: ${{ runner.os }}-pip-${{ hashFiles('**/Pipfile.lock') }}
-          python_version: 3.8
       - name: lint
         uses: Fondeadora/ci-tools/lint@v1.4.5
         with:
@@ -40,13 +39,12 @@ jobs:
         with:
           access_token: ${{ secrets.ACCESS_TOKEN }}
           cache_hit: ${{ steps.cache-dependencies.outputs.cache-hit == 'true' }}
-          python_version: 3.8
-      # - name: Publish code coverage
-      #   uses: paambaati/codeclimate-action@v2.6.0
-      #   env:
-      #     CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-      #   with:
-      #     coverageCommand: pipenv run make xmlcov
+      - name: Publish code coverage
+        uses: paambaati/codeclimate-action@v2.6.0
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+        with:
+          coverageCommand: pipenv run make xmlcov
 
   commit_lint:
     runs-on: ubuntu-latest
@@ -65,7 +63,6 @@ jobs:
           access_token: ${{ secrets.ACCESS_TOKEN }}
           cache_hit: ${{ steps.cache-dependencies.outputs.cache-hit == 'true'}}
           lint_command: pipenv run make commit_check
-          python_version: 3.8
 
   deploy:
     needs:
@@ -92,4 +89,3 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
           aws-profile: default
-          python_version: 3.8

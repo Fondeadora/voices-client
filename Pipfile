@@ -4,18 +4,18 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-radon= "~=4.5.0"
-commitizen= "~=2.17.0"
-expects= "~=0.9.0"
-isort= "~=5.8.0"
-pyformat= "~=0.7"
-wemake-python-styleguide= "~=0.15.2"
+commitizen = "~=1.23.0"
+expects = "~=0.9.0"
+isort = "~=4.3.21"
+pyformat = "~=0.7"
+wemake-python-styleguide = "~=0.13.3"
 pytest= "~=6.2.3"
-pylint= "~=2.7.4"
-add-trailing-comma= "~=2.1.0"
-coverage = "*"
+pylint= "~=2.7.2"
+add-trailing-comma = "~=1.5.0"
+coverage = "~=5.0.1"
 
 [packages]
+requests = "~=2.24.0"
 
 [requires]
-python_version = "3.8"
+python_version = "3.7"
