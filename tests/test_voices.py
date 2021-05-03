@@ -8,8 +8,8 @@ import pytest
 
 from voices import Voices
 
-VOICES_USER = os.environ['VOICES_USER']
-VOICES_PASS = os.environ['VOICES_PASS']
+VOICES_USER = os.getenv('VOICES_USER')
+VOICES_PASS = os.getenv('VOICES_PASS')
 
 
 @pytest.mark.parametrize(
