@@ -2,8 +2,6 @@
 
 from setuptools import find_packages, setup
 
-this_directory = path.abspath(path.dirname(__file__))
-
 with open('README.md', 'r') as f:
     long_description = f.read()
 
